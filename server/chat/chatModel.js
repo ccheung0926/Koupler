@@ -1,6 +1,6 @@
 var dbConnection = require('../db/index.js');
 
-//processParams takes two usernames and returns two sorted userids 
+//processParams takes an array of two usernames and returns two sorted userids 
 function processParams (unprocessedParams, callback) {
   var queryString = 'SELECT id FROM couples WHERE username = (?) UNION ALL SELECT id FROM couples WHERE username = (?);';
   dbConnection.query(queryString, [unprocessedParams.to, unprocessedParams.from], function(err, data) {
@@ -24,11 +24,34 @@ function processParams (unprocessedParams, callback) {
 }
 
 module.exports = {
+  //gets last 10 messages, senderusername, and time for chat between two users
+  getMessages: function(unprocessedParams, callback) {
 
+    processParams(unprocessedParams, function(param){
+      var usersParam = param[0];
+      console.log("processed usersParams is ", usersParam);
+
+      var getTotalQuery = 'SELECT total_messages FROM total_messages WHERE identifier = (?);';
+      dbConnection.query(getTotalQuery, usersParam, function(err, data) {
+        var total = data[0].total_messages;
+
+        if (total <= 10) {
+          var messagesParam = [usersParam + ":%"];
+          var getAllMessagesQuery = 'SELECT message, created_on, username FROM messages, couples WHERE id = sender && identifier_message_number LIKE (?);';
+          dbConnection.query(getAllMessagesQuery, messagesParam, callback);  
+        }
+        else {
+          var messagesParam = [usersParam + ":" + total-10, usersParam + ":" + total ];
+          var getRecentMessagesQuery = 'SELECT message, created_on, username FROM messages, couples WHERE id = sender && identifier_message_number BETWEEN (?) AND (?);';
+          dbConnection.query(getRecentMessagesQuery, messagesParam, callback);
+        }
+      })
+    })
+  },
   //update total_messages table and messages table
   postMessage: function(unprocessedParams, callback) { 
     
-    //unprocessedParams is [sender, receiver, msg]. the param being returned is [userParams, senderParams]
+    //unprocessedParams is [from, to, msg]. the param being returned is [userParams, senderParams]
     processParams(unprocessedParams, function(param){
       var usersParam = param[0];
       var senderParam = param[1];

@@ -9,7 +9,7 @@ module.exports = function (app, express) {
   var activityRouter = express.Router();
   var profileRouter = express.Router();
   var chatRouter = express.Router();
-  
+
   // Middleware to parse request body
   app.use(morgan('dev'));
   app.use(bodyParser.urlencoded({extended: true}));
@@ -17,11 +17,12 @@ module.exports = function (app, express) {
 
   // Render client/index.html upon receiving request
   app.use(express.static(__dirname + './../../client'));
+  // app.use(express.static(__dirname + './../../build'));
   app.use(express.static(__dirname + './../assets'));
 
   app.use('/couples', coupleRouter);
   app.use('/activities', activityRouter);
-  app.use('/profile', profileRouter); 
+  app.use('/profile', profileRouter);
   app.use('/chat', chatRouter);
 
   require('../couples/coupleRoute.js')(coupleRouter);

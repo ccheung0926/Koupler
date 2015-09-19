@@ -5,7 +5,7 @@ angular.module('koupler.factories', [])
                     {'name': 'Hiking'},
                     {'name': 'Dinner'},
                     {'name': 'Opera'},
-                    {'name': 'Dancing'}, 
+                    {'name': 'Dancing'},
                     {'name': 'Music Show'},
                     {'name': 'Coffee'},
                     {'name': 'Swinging'},
@@ -21,7 +21,7 @@ angular.module('koupler.factories', [])
   };
 })
 
-.factory('AuthTokenFactory', function($window) {
+.factory('AuthTokenFactory',['$window', function($window) {
   var key = 'JWT';
 
   var getToken = function() {
@@ -30,7 +30,7 @@ angular.module('koupler.factories', [])
 
   var setToken = function(token) {
     if(token){
-      $window.localStorage.setItem(key, token)
+      $window.localStorage.setItem(key, token);
     } else {
       $window.localStorage.removeItem(key);
       console.log($window.localStorage.getItem(key));
@@ -38,7 +38,7 @@ angular.module('koupler.factories', [])
   };
 
   var isAuth = function() {
-    console.log('in isAuth')
+    console.log('in isAuth');
     return !!$window.localStorage.getItem(key);
   };
 
@@ -47,7 +47,10 @@ angular.module('koupler.factories', [])
     setToken: setToken,
     isAuth: isAuth
   };
-})
+
+
+
+}])
 
 .factory('socket', ['$rootScope', function ($rootScope) {
   var socket = io.connect();
@@ -78,9 +81,5 @@ angular.module('koupler.factories', [])
       });
     }
   };
+
 }]);
-
-
-
-
-

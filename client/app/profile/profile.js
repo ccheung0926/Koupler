@@ -67,6 +67,13 @@ angular.module('koupler.profile', [
     //get chat history
 
     $http.get('/chat')
+      .then(function(response) {
+        if (response.data[0].isAuthorizedToEdit) {
+          vm.isAuthorizedToEdit = true;
+        };
+        console.log("getProfileInfo:", response.data);
+        vm.profileData = response.data[0];
+      });
 
     socket.emit('sendReceiverToServer', {
       receiverUsername: vm.profileData.username,

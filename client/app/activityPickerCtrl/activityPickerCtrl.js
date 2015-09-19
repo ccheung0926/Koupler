@@ -1,6 +1,6 @@
 angular.module('koupler.activities', [])
 
-.controller('ActivityPickerCtrl', function($scope, $http, Activities, AuthTokenFactory) {
+.controller('ActivityPickerCtrl',['$scope', '$http', 'Activities', 'AuthTokenFactory', function($scope, $http, Activities, AuthTokenFactory) {
 
   vm = this;
 
@@ -10,10 +10,10 @@ angular.module('koupler.activities', [])
   vm.postActivity = function (activity, zip, distance) {
     var token = AuthTokenFactory.getToken();
 
-    $http.post('/activities/match', 
+    $http.post('/activities/match',
         {
           activity: vm.activityChosen,
-          userZipCode: vm.userZipCode, 
+          userZipCode: vm.userZipCode,
           searchDistance: vm.searchDistance,
           token: token
         })
@@ -28,4 +28,4 @@ angular.module('koupler.activities', [])
         })
       })
   };
-});
+}]);

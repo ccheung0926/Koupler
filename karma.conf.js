@@ -9,15 +9,19 @@ module.exports = function(config){
     files: [
     'node_modules/angular/angular.min.js',
     'node_modules/angular-mocks/angular-mocks.js',
-
-    //our app code
+    'bower_components/socket.io-client/socket.io.js',
+    'bower_components/angular-ui-router/release/angular-ui-router.min.js',
+    'bower_components/angular-bootstrap/ui-bootstrap-tpls.min.js',
+    'bower_components/ng-file-upload/ng-file-upload.min.js',
+    'client/app/app.js',
+    'client/index.js',
     'client/app/**/*.js',
 
     //our templates
     'client/app/**/*.html',
 
     //our spec files
-    'specs/client/**/*.js',
+    'specs/client/**/*.js'
     ],
 
     exclude: [
@@ -38,7 +42,7 @@ module.exports = function(config){
 
     coverageReporter: {
       type: 'html',
-      dir: 'coverage/',
+      dir: 'coverage/'
     },
 
     port: 8080,
