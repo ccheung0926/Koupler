@@ -2,19 +2,19 @@
 
 <div id="match" ng-controller="MatchCtrl">
 
-<h3 class="stroke">Matches</h3>
+  <h3 class="stroke">Matches</h3>
 
-<div class="match-container" ng-repeat="match in ctrl.matches">
-  <a ng-href="#/profile/{{ match.username }}">
-    <!-- <img ng-src="{{ match.profilePic }}" height="150px" width="150px"> -->
-  </a>
-  <span class="strokeSmall"> {{ match.person_1_first_name }} & {{ match.person_2_first_name }} </span>
-  <!-- <div ng-repeat="activity in match.activities"> -->
-    <span class="activity col-md-1"> {{ ctrl.activityChosen.name }} </span>
-  <!-- </div> -->
-  <p class="row"><h4>City</h4> {{ match.location_city }} </p>
-  <p class="row"><h4>About Us</h4> {{ match.about_us }} </p>
-  <button class="signupbutton" ng-click="console.log(match.username)">Start Chatting</button>
-</div>
+  <div class="match-container" ng-repeat="match in ctrl.matches">
+    <a ng-href="#/profile/{{ match.username }}">
+      <!-- <img ng-src="{{ match.profilePic }}" height="150px" width="150px"> -->
+    </a>
+    <span class="strokeSmall"> {{ match.person_1_first_name }} & {{ match.person_2_first_name }} </span>
+    <!-- <div ng-repeat="activity in match.activities"> -->
+      <span class="activity col-md-1"> {{ ctrl.activityChosen.name }} </span>
+    <!-- </div> -->
+    <p class="row"><h4>City</h4> {{ match.location_city }} </p>
+    <p class="row"><h4>About Us</h4> {{ match.about_us }} </p>
+    <button class="signupbutton" ng-click="console.log(match.username)">Start Chatting</button>
+  </div>
 
 </div>

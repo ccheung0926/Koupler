@@ -6,6 +6,7 @@ angular.module('koupler.activities', [])
 
   vm.activities = Activities.getActivities();
 
+  vm.activityChosen;
   vm.postActivity = function (activity, zip, distance) {
     var token = AuthTokenFactory.getToken();
 
@@ -20,6 +21,11 @@ angular.module('koupler.activities', [])
         vm.matches = response.data;
         console.log(vm.matches);
         vm.matched = true;
-      });
+        console.log(vm.activityChosen);
+        $http.post('/activities/suggestions', {
+          activityChosen: vm.activityChosen,
+          userZipCode: vm.userZipCode
+        })
+      })
   };
 });

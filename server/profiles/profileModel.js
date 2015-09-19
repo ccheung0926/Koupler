@@ -35,7 +35,7 @@ module.exports = {
         var filePath = results[0].photo_filepath;
         callback(filePath);
       }
-    })
+    });
   },
 
   // input: params expects an array [username, file]
@@ -57,13 +57,13 @@ module.exports = {
       if (err) {
         console.error(err);
       }
-    });
 
-    // move and rename image from temp location to filePathServer
-    fs.rename(file.path, filePathServer, function(err) {
-      if (err) {
-        console.error(err);
-      }
+      // move and rename image from temp location to filePathServer
+      fs.rename(file.path, filePathServer, function(err) {
+        if (err) {
+          console.error(err);
+        }
+      });
     });
 
     var queryString = 'UPDATE couples SET photo_filepath = ? WHERE username = ?;';

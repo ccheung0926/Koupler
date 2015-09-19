@@ -5,21 +5,26 @@ var formidable = require('formidable');
 
 var getUsername = function(token) {
   var decodedToken = jwt.decode(token);
+  console.log("decodedToken:" , decodedToken);
   return decodedToken.username;
-}
+};
 
 module.exports = {
 
   loadProfile: function (req, res, next) {
-    var username = getUsername(req.query.token); //note strange but working syntax
+    var username = req.params.username;
+    var token = req.headers['x-access-token'];
+    var requestor = getUsername(token); //note strange but working syntax
 
-    profile.getProfileInfo([username], function(err, data) {
+    profile.getProfileInfo([ username ], function(err, data) {
       if(err) console.log(err);
 
       if(data) {
         console.log("profile data received!", data);
+        if (requestor === username) {
+          data[0].isAuthorizedToEdit = true;
+        };
         res.send(data);
-        res.end();
       }
     });
   },
@@ -46,7 +51,7 @@ module.exports = {
   },
 
   storeProfilePic: function(req, res, next) {
-    console.log("attempting to save profile pic to server...")
+    console.log("attempting to save profile pic to server...");
 
     // formidable parses data from image upload form front client.
     // files can be accessed using the files variable

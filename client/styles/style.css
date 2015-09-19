@@ -53,6 +53,10 @@ html, .container-fluid {
   font-family: 'Lato', sans-serif;
 }
 
+.profile-view {
+  margin-top: 40px;
+}
+
 #signin {
   margin-top: 5px;
   margin-left: 870px;

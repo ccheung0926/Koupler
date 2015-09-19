@@ -5,6 +5,7 @@ angular.module('koupler', [
   'koupler.auth',
   'koupler.match',
   'koupler.profile',
+  'koupler.suggestions',
   'ui.router',
   'ui.bootstrap',
   'ngFileUpload'
@@ -49,6 +50,9 @@ angular.module('koupler', [
         },
         'match@activities': {
           templateUrl: 'app/match/match.html'
+        },
+        'suggestions@activities': {
+          templateUrl: 'app/match/partial-suggestions.html'
         }
       },
       controller: 'ActivityPickerCtrl',
@@ -66,7 +70,7 @@ angular.module('koupler', [
   // then add it to the header so the server can validate the request
   var attach = {
     request: function(object) {
-      var jwt = $window.localStorage.getItem('com.fudWize');
+      var jwt = $window.localStorage.getItem('JWT');
       if (jwt) {
         object.headers['x-access-token'] = jwt;
       }

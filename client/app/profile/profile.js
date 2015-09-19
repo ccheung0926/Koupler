@@ -1,26 +1,12 @@
-angular.module('koupler.profile', [])
+angular.module('koupler.profile', [
+  'ui.bootstrap'
+  ])
 
 .controller('ProfileCtrl', function($scope, $state, $http, Activities, AuthTokenFactory, Upload, socket) {
+
   var vm = this;
   //placeholder for POST request until routeParam is set up
   vm.username = $state.params.username;
-
-  vm.isAuthorized = true;
-
-  vm.testUser = {
-    username: 'testUser',
-    contactInfo: {
-      name1: 'Boozer',
-      name2: 'Woof',
-      email: 'woof@bark.com',
-      phone: 7465746374
-    },
-    profilePic: 'http://www.qykapp.com/article/content/images/2015/06/dog-1-1.jpg',
-    activities: ['eating human food', 'playing catch', 'pooping', 'hunting squirrels', 'getting into the trash', 'chasing cats', 'cuddling'],
-    profileInfo: {
-      'About Us': "We're a fun-loving couple of scruffy pups looking to go on a dog date."
-    }
-  };
 
   vm.goToActivities = function() {
     $state.go('activities');
@@ -30,19 +16,29 @@ angular.module('koupler.profile', [])
 
   vm.getProfileInfo = function() {
     var token = AuthTokenFactory.getToken();
+    console.log(token);
     //GET request should respond with user's profile picture, interests, about, memories, etc.
-    $http.get('/profile', {params:
-      {token: token}
-    })
+    $http.get('/profile/' + vm.username)
       .then(function(response) {
-        if (response.data.isAuthorized) {
-          vm.isAuthorized = true;
-        }
-        vm.profileData = response.data; //looks like [{about us: "", username: ""}]
+        if (response.data[0].isAuthorizedToEdit) {
+          vm.isAuthorizedToEdit = true;
+        };
+        console.log("getProfileInfo:", response.data);
+        vm.profileData = response.data[0];
       });
   };
 
   vm.getProfileInfo();
+
+  vm.showEditModal = function() {
+    var editModal = $modal.open({
+      animation: $scope.animationsEnabled,
+      templateUrl: 'app/profile/modal-editProfile.html',
+      controller: 'ProfileCtrl',
+    });
+  }
+
+
 
   vm.uploadFiles = function(file) {
     vm.f = file;
