@@ -11,7 +11,7 @@ angular.module('koupler.profile', [
   vm.goToActivities = function() {
     $state.go('activities');
   };
-
+  console.log('my username', $scope.$parent.username)
   vm.profileData = {};
 
   vm.getProfileInfo = function() {
@@ -28,7 +28,7 @@ angular.module('koupler.profile', [
       });
   };
 
-  vm.getProfileInfo();
+
 
   vm.showEditModal = function() {
     var editModal = $modal.open({
@@ -57,11 +57,17 @@ angular.module('koupler.profile', [
     }
   };
 
+
   vm.chatInit = function() {
     $scope.openConversation = true; 
     //ctrl.profileData.username
     // profileData.person_1_first_name
     //                    2 last name
+    console.log(vm.profileData);
+    //get chat history
+
+    $http.get('/chat')
+
     socket.emit('sendReceiverToServer', {
       receiverUsername: vm.profileData.username,
       couples1: vm.profileData.person_1_first_name + " " + vm.profileData.person_1_last_name,

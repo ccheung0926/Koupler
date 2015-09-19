@@ -14,8 +14,8 @@ module.exports = function(server){
       socket.emit('getNamefromServer', data);
     });
 
-    socket.on('sendMsgToSever', function(data){
-      console.log('sendMsgToSever', data); 
+    socket.on('sendMessageToServer', function(data){
+      console.log('sendMessageToServer', data); 
       //chat hist bewteen users
       // When a message is received, emit the data to the receiver.
       users[data.to].emit('receivedMessage', data);
