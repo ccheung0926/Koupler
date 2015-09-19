@@ -1,6 +1,6 @@
 angular.module('koupler.profile', [])
 
-.controller('ProfileCtrl', function($scope, $state, $http, Activities, AuthTokenFactory, Upload) {
+.controller('ProfileCtrl', function($scope, $state, $http, Activities, AuthTokenFactory, Upload, socket) {
   var vm = this;
   //placeholder for POST request until routeParam is set up
   vm.username = $state.params.username;
@@ -61,10 +61,15 @@ angular.module('koupler.profile', [])
     }
   };
 
-  vm.chatInit = function(receiver) {
-    if(!$scope.openConversation) {
-      $scope.openConversation = true; 
-    }
-    console.log($scope.openConversation);
+  vm.chatInit = function() {
+    $scope.openConversation = true; 
+    //ctrl.profileData.username
+    // profileData.person_1_first_name
+    //                    2 last name
+    socket.emit('sendReceiverToServer', {
+      receiverUsername: vm.profileData.username,
+      couples1: vm.profileData.person_1_first_name + " " + vm.profileData.person_1_last_name,
+      couples2: vm.profileData.person_2_first_name + " " + vm.profileData.person_2_last_name
+    });
   }
 })

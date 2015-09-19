@@ -38,7 +38,10 @@ img {
     margin: 0;
 }
 
-p { margin: 0; }
+.messageContent { 
+  margin: 0; 
+  color: black;
+}
 
 .clearfix { *zoom: 1; } /* For IE 6/7 */
 .clearfix:before, .clearfix:after {
@@ -65,6 +68,7 @@ p { margin: 0; }
   padding: 16px 24px;
 }
 
+/*online*/
 #live-chat h4:before {
   background: #1a8a34;
   border-radius: 50%;
