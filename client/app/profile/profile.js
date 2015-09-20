@@ -7,7 +7,6 @@ angular.module('koupler.profile', [
   var vm = this;
   //placeholder for POST request until routeParam is set up
   vm.username = $state.params.username;
-  $window.localStorage.setItem('Koup_user', vm.username);
 
   $window.localStorage.setItem('Koup_user', vm.username);
   vm.activities = Activities.getActivities();
@@ -37,8 +36,11 @@ angular.module('koupler.profile', [
         vm.profileData = response.data[0];
         vm.userActivities = response.data[1];
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
         vm.profileData.activitiesToAdd = [];
+>>>>>>> (feature) can fully edit and update profile, can view activities in profile, working on adding activities during edit of profile
+=======
 >>>>>>> (feature) can fully edit and update profile, can view activities in profile, working on adding activities during edit of profile
       });
 
@@ -49,6 +51,10 @@ angular.module('koupler.profile', [
     $http.post('/profile/' + vm.username + '/addActivity', activity);
 =======
 >>>>>>> (fix) profile pic changes when new photo uploaded
+  };
+
+  vm.addActivity = function(activity) {
+    $http.post('/profile/' + vm.username + '/addActivity', activity);
   };
 
   vm.getProfileInfo();
@@ -70,16 +76,22 @@ angular.module('koupler.profile', [
   }
 
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> (feature) can fully edit and update profile, can view activities in profile, working on adding activities during edit of profile
   vm.submitProfileEdit = function(data) {
     $http.post('/profile/' + vm.username + '/edit', data)
       .then(function(response) {
         $state.reload();
       });
   };
+<<<<<<< HEAD
 =======
   // vm.cancelEditModal = function () {
   //   $modalInstance.dismiss('cancel');
   // };
+>>>>>>> (feature) can fully edit and update profile, can view activities in profile, working on adding activities during edit of profile
+=======
 >>>>>>> (feature) can fully edit and update profile, can view activities in profile, working on adding activities during edit of profile
 
   vm.uploadFiles = function(file) {
