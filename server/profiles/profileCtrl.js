@@ -24,6 +24,7 @@ module.exports = {
         if (requestor === username) {
           data[0].isAuthorizedToEdit = true;
         };
+        console.log('profileCtrl data', data);
         res.send(data);
       }
     });

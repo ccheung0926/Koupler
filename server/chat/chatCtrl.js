@@ -44,6 +44,8 @@ module.exports = {
   },
 
   getMessages: function (req, res, next) {
+    console.log("req is", req.query.token, "req.query.username", req.query.username);
+
     //TODO: replace filler values
     var unprocessedParams = {
       to: "cindy",
@@ -51,11 +53,11 @@ module.exports = {
     };
 
     chat.getMessages(unprocessedParams, function(err, data) {
-      if (err) console.log(err);
+      if (err) console.log('error');
 
       if(data) {
         console.log("messages received from db!!!!!!", data);
-        res.end();
+        res.end(JSON.stringify(data));
       }
     });
   }
