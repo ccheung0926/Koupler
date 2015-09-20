@@ -67,6 +67,7 @@ angular.module('koupler.profile', [
     //ctrl.profileData.username
     // profileData.person_1_first_name
     //                    2 last name
+    
     //get chat history
     $http.get('/chat')
       .then(function(response) {

@@ -50,6 +50,6 @@ angular.module('koupler.auth', [])
   $scope.signout = function() {
     AuthTokenFactory.setToken();
     $state.go('home');
-  };
+  };   
 
 }]);

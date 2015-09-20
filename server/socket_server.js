@@ -3,16 +3,10 @@ module.exports = function(server){
   var path = require('path'); 
   var io = require('socket.io')(server);
   var users = {};
-  var sender;
 
   io.on('connection', function(socket){
     console.log('socket connected');
-    //sender's username
-    socket.on('getSenderUsername', function(data){
-      console.log('getSenderUsername', data);
-      users[data] = socket;
-      sender = data;
-    });
+
     //receiver's username
     socket.on('sendReceiverToServer', function(data){
       console.log('sendReceiverToServer', data);

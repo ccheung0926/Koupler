@@ -3,6 +3,7 @@ angular.module('koupler.chat', [])
 .controller('ChatCtrl', ['$scope','socket',function($scope, socket){
   var vm = this;
   vm.openChatBox = false;
+  vm.sender = $scope.$parent.sender;
 
 
   vm.openClose = function() {
