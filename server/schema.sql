@@ -307,7 +307,6 @@ WHERE (activities.activity_name='Dinner' OR
        activities.activity_name='Hiking')
 AND couples.username='beckhams';
 
-
 INSERT INTO couples_activities (couples_id, activities_id)
 SELECT couples.id, activities.id
 FROM couples, activities
@@ -316,7 +315,6 @@ WHERE (activities.activity_name='Dinner' OR
        activities.activity_name='Music Show' OR
        activities.activity_name='Hiking')
 AND couples.username='bowzers';
-
 
 INSERT INTO couples_activities (couples_id, activities_id)
 SELECT couples.id, activities.id

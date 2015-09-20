@@ -1,3 +1,16 @@
-<div ng-controller="SuggestionsCtrl">
+<div ng-controller="SuggestionsCtrl as suggCtrl">
   <h3 class="stroke">Suggestions</h3>
+
+  <div class="suggestions-container" ng-repeat="suggestion in ctrl.suggestions" ng-controller="ActivityPickerCtrl">
+    <div class="editContainer modal-header"> 
+      <h3 class="strokeSmall">{{ suggestion.name }}</h3>
+    </div>
+    <div class="row">
+      <p class="black-text">{{ suggestion.location.address }}</p>
+      <p class="black-text">{{ suggestion.location.city }}</p>
+      <p class="black-text"><strong>What is it?   </strong>{{ suggestion.categories[0].name }}</p>
+      <p class= "black-text"><strong>Rating:   </strong>{{ suggestion.rating }}</p>
+    </div>
+<!--     <rating class="strokeSmall" ng-model="Math.floor({{ suggestion.rating }})" max="suggCtrl.maxRating" readonly="suggCtrl.isReadOnly"></rating> -->
+  </div>
 </div>
