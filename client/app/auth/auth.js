@@ -2,7 +2,7 @@
 //signup/signin form using the injected AuthTokenFactory service.
 angular.module('koupler.auth', [])
 
-.controller('AuthCtrl', ['$scope', '$http', '$window', '$state', 'AuthTokenFactory', function ($scope, $http, $window, $state, AuthTokenFactory){
+.controller('AuthCtrl', ['$scope', '$http', '$window', '$state', 'AuthTokenFactory', 'socket', function ($scope, $http, $window, $state, AuthTokenFactory, socket){
 
   var user = {};
   //To Do add post request handlers to factories.js
@@ -16,6 +16,8 @@ angular.module('koupler.auth', [])
         var username = response.data.username;
         $state.go('profile', {username: username});
         // $location.path('/profile/' + username);
+        //saving username in mainCtrl
+        $scope.$parent.sender = username;
       },
       function(err){
         console.log(err);
@@ -38,6 +40,7 @@ angular.module('koupler.auth', [])
         AuthTokenFactory.setToken(response.data.token);
         var username = response.data.username;
         $state.go('profile', {username: username});
+        $scope.$parent.sender = username;
       },
       function(err){
         console.log(err);

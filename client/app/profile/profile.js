@@ -7,11 +7,11 @@ angular.module('koupler.profile', [
   var vm = this;
   //placeholder for POST request until routeParam is set up
   vm.username = $state.params.username;
+  $scope.sender = $scope.$parent.sender;
 
   vm.goToActivities = function() {
     $state.go('activities');
   };
-  console.log('my username', $scope.$parent.username)
   vm.profileData = {};
 
   vm.getProfileInfo = function() {
@@ -27,7 +27,7 @@ angular.module('koupler.profile', [
         vm.profileData = response.data[0];
       });
   };
-
+  vm.getProfileInfo();
 
 
   vm.showEditModal = function() {
@@ -57,24 +57,25 @@ angular.module('koupler.profile', [
     }
   };
 
+  socket.on('senderNameToClient', function(sender){
+    vm.sender = sender;
+  });
 
   vm.chatInit = function() {
-    $scope.openConversation = true; 
+    $scope.openConversation = true;
+    //get sender's username
     //ctrl.profileData.username
     // profileData.person_1_first_name
     //                    2 last name
-    console.log(vm.profileData);
     //get chat history
-
     $http.get('/chat')
       .then(function(response) {
         if (response.data[0].isAuthorizedToEdit) {
           vm.isAuthorizedToEdit = true;
         };
         console.log("getProfileInfo:", response.data);
-        vm.profileData = response.data[0];
+        vm.chatData = response.data;
       });
-
     socket.emit('sendReceiverToServer', {
       receiverUsername: vm.profileData.username,
       couples1: vm.profileData.person_1_first_name + " " + vm.profileData.person_1_last_name,
