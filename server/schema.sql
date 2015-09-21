@@ -286,6 +286,7 @@ VALUES  ("Hiking", "Outdoors"),
         ("Swinging", "Food & Entertainment"),
         ("Sight-Seeing", "Culture");
 
+
 INSERT INTO couples_activities (couples_id, activities_id)
 SELECT couples.id, activities.id
 FROM couples, activities
