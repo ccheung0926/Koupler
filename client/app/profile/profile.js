@@ -67,16 +67,17 @@ angular.module('koupler.profile', [
     //get chat history
     $http.get('/chat', {params: {to: vm.username, from: $scope.sender}})
       .then(function(response) {
-        if (response.data[0].isAuthorizedToEdit) {
-          vm.isAuthorizedToEdit = true;
-        };
-        $scope.chatData = response.data;
-        console.log('chat hist.', $scope.chatData);
+        // if (response.data[0].isAuthorizedToEdit) {
+        //   vm.isAuthorizedToEdit = true;
+        // };
+        vm.chatData = response.data;
+        console.log('chat hist.', vm.chatData);
       });
     socket.emit('sendReceiverToServer', {
       receiverUsername: vm.profileData.username,
       couples1: vm.profileData.person_1_first_name + " " + vm.profileData.person_1_last_name,
-      couples2: vm.profileData.person_2_first_name + " " + vm.profileData.person_2_last_name
+      couples2: vm.profileData.person_2_first_name + " " + vm.profileData.person_2_last_name,
+      chatHist: vm.chatData
     });
   }
 })

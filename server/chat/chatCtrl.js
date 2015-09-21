@@ -42,7 +42,7 @@ module.exports = {
     // };
 
     chat.getMessages(unprocessedParams, function(err, data) {
-      if(err) res.end("failed to retrieve messages");
+      if(err) res.end(JSON.stringify([]));
       // if (err) console.log(err);
 
       console.log("in get messages", data);

@@ -36,17 +36,25 @@ module.exports = {
 
         var getTotalQuery = 'SELECT total_messages FROM total_messages WHERE identifier = (?);';
         dbConnection.query(getTotalQuery, usersParam, function(err, data) {
-          var total = data[0].total_messages;
+          if (data.length > 0) {
 
-          if (total <= 10) {
-            var messagesParam = [usersParam + ":%"];
-            var getAllMessagesQuery = 'SELECT message, created_on, username FROM messages, couples WHERE id = sender && identifier_message_number LIKE (?);';
-            dbConnection.query(getAllMessagesQuery, messagesParam, callback);  
+            var total = data[0].total_messages;
+            var subtotal = total-10;
+
+            if (total <= 10) {
+              var messagesParam = [usersParam + ":%"];
+              var getAllMessagesQuery = 'SELECT message, created_on, username FROM messages, couples WHERE id = sender && identifier_message_number LIKE (?);';
+              dbConnection.query(getAllMessagesQuery, messagesParam, callback);  
+            }
+            else {
+              var messagesParam = [usersParam + ":" + subtotal, usersParam + ":" + total ];
+              var getRecentMessagesQuery = 'SELECT message, created_on, username FROM messages, couples WHERE id = sender && identifier_message_number BETWEEN (?) AND (?);';
+              dbConnection.query(getRecentMessagesQuery, messagesParam, callback);
+            }
           }
+
           else {
-            var messagesParam = [usersParam + ":" + total-10, usersParam + ":" + total ];
-            var getRecentMessagesQuery = 'SELECT message, created_on, username FROM messages, couples WHERE id = sender && identifier_message_number BETWEEN (?) AND (?);';
-            dbConnection.query(getRecentMessagesQuery, messagesParam, callback);
+            callback([]);
           }
         })
     })

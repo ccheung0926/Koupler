@@ -5,7 +5,6 @@ angular.module('koupler.chat', [])
   vm.openChatBox = false;
   vm.sender = $scope.$parent.sender;
   vm.chatStart = true;
-  vm.tempMsgStorage = $scope.$parent.chatData;
 
   vm.closeBox = function() {
     vm.chatStart = false;
@@ -20,6 +19,7 @@ angular.module('koupler.chat', [])
     else {
       vm.openChatBox = false;
     }
+    console.log('vm.tempMsgStorage', vm.tempMsgStorage);
     console.log('$scope.parent', $scope.$parent.sender);
   };
 
@@ -42,11 +42,12 @@ angular.module('koupler.chat', [])
   }
 
   //get receiver's username from socket
-  socket.on('getNamefromServer', function(name) {
+  socket.on('getNameHistfromServer', function(data) {
   //{receiverUsername: "beckhams",
   // couples1: "Victoria Beckham", couples2: "David Beckham"}
-    vm.name = name.couples1 + " & " + name.couples2;
-    vm.receiverUsername = name.receiverUsername;
+    vm.name = data.couples1 + " & " + data.couples2;
+    vm.receiverUsername = data.receiverUsername;
+    vm.tempMsgStorage = data.chatData;
   });
 
   //user received message

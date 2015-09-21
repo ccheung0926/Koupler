@@ -11,7 +11,7 @@ module.exports = function(server){
       console.log('sendReceiverToServer', data);
       users[data.receiverUsername] = socket;
       console.log('receiver', data);
-      socket.emit('getNamefromServer', data);
+      socket.emit('getNameHistfromServer', data);
     });
 
     socket.on('sendMessageToServer', function(data){
