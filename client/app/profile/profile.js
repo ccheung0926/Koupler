@@ -13,6 +13,7 @@ angular.module('koupler.profile', [
   };
 
   vm.profileData = {};
+  vm.hideProfilePic = false;
 
   vm.getProfileInfo = function() {
     var token = AuthTokenFactory.getToken();
@@ -26,6 +27,7 @@ angular.module('koupler.profile', [
         console.log("getProfileInfo:", response.data);
         vm.profileData = response.data[0];
       });
+
   };
 
   vm.getProfileInfo();
@@ -42,7 +44,10 @@ angular.module('koupler.profile', [
 
   vm.uploadFiles = function(file) {
     vm.f = file;
+
     if (file && !file.$error) {
+      vm.hideProfilePic = true;
+
       file.upload = Upload.upload({
         url: '/profile/' + vm.username + '/pic',
         file: file,
