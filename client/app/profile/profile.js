@@ -31,15 +31,24 @@ angular.module('koupler.profile', [
         }
         console.log("getProfileInfo:", response.data);
         vm.profileData = response.data[0];
-        vm.userActivities = response.data[1];
-        vm.profileData.activitiesToAdd = [];
+        vm.userActivities = [];
+        response.data[1].forEach(function(activity) {
+          if (vm.userActivities.indexOf(activity) == -1) {
+            vm.userActivities.push(activity);
+          }
+        })
       });
 
+  };
+
+  vm.addActivity = function(activity) {
+    $http.post('/profile/' + vm.username + '/addActivity', activity);
   };
 
   vm.getProfileInfo();
 
   vm.showEditModal = function() {
+    vm.activitiesToAdd = [];
     var editModal = $modal.open({
       animation: $scope.animationsEnabled,
       templateUrl: 'app/profile/modal-editProfile.html',
@@ -47,16 +56,13 @@ angular.module('koupler.profile', [
     });
   };
 
-  vm.submitProfileEdit = function() {
-    $http.post('/profile/' + vm.username + '/edit', vm.profileData)
+
+  vm.submitProfileEdit = function(data) {
+    $http.post('/profile/' + vm.username + '/edit', data)
       .then(function(response) {
         $state.reload();
       });
-  }
-
-  // vm.cancelEditModal = function () {
-  //   $modalInstance.dismiss('cancel');
-  // };
+  };
 
   vm.uploadFiles = function(file) {
     vm.f = file;

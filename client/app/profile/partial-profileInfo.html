@@ -3,7 +3,7 @@
   <img class="col-md-4" ng-hide="ctrl.hideProfilePic" src="{{ ctrl.profileData.photo_filepath }}">
   <img class="col-md-4" ng-show="ctrl.f" ngf-src="ctrl.f">
   <h1 class="stroke">{{ ctrl.profileData.person_1_first_name }} & {{ ctrl.profileData.person_2_first_name }}</h1>
-  <div class="activity col-md-4" ng-repeat="activity in ctrl.userActivities">{{ activity }}</div>
+  <div class="activity col-md-4" ng-repeat="activity in ctrl.userActivities track by $index">{{ activity }}</div>
 </div>
 
 <div class="row">
