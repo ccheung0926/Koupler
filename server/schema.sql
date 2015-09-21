@@ -278,14 +278,13 @@ Parallel parking recently moved back skiing loyal. Chilling at a bar with friend
 
 INSERT INTO activities (activity_name, activity_type)
 VALUES  ("Hiking", "Outdoors"),
-        ("Unicorn Hunting", "Outdoors"),
-        ("Cat Staring", "Pets"),
         ("Dinner", "Food & Entertainment"),
         ("Opera", "Food & Entertainment"),
-        ("Live Music", "Food & Entertainment"),
         ("Dancing", "Food & Entertainment"),
-        ("Sight-Seeing", "Culture"),
-        ("Doggy Date", "Pets");
+        ("Music Show", "Food & Entertainment"),
+        ("Coffee", "Food & Entertainment"),
+        ("Swinging", "Food & Entertainment"),
+        ("Sight-Seeing", "Culture");
 
 
 INSERT INTO couples_activities (couples_id, activities_id)
@@ -294,8 +293,8 @@ FROM couples, activities
 WHERE (activities.activity_name='Dinner' OR
        activities.activity_name='Opera' OR
        activities.activity_name='Hiking' OR
-       activities.activity_name='Cat Staring' OR
-       activities.activity_name='Doggy Date')
+       activities.activity_name='Dancing' OR
+       activities.activity_name='Swinging')
 AND couples.username='pitts';
 
 INSERT INTO couples_activities (couples_id, activities_id)
@@ -304,8 +303,8 @@ FROM couples, activities
 WHERE (activities.activity_name='Dinner' OR
        activities.activity_name='Opera' OR
        activities.activity_name='Dancing' OR
-       activities.activity_name='Live Music' OR
-       activities.activity_name='Cat Staring')
+       activities.activity_name='Music Show' OR
+       activities.activity_name='Hiking')
 AND couples.username='beckhams';
 
 
@@ -313,9 +312,8 @@ INSERT INTO couples_activities (couples_id, activities_id)
 SELECT couples.id, activities.id
 FROM couples, activities
 WHERE (activities.activity_name='Dinner' OR
-       activities.activity_name='Unicorn Hunting' OR
        activities.activity_name='Sight-Seeing' OR
-       activities.activity_name='Live Music' OR
+       activities.activity_name='Music Show' OR
        activities.activity_name='Hiking')
 AND couples.username='bowzers';
 
@@ -326,25 +324,24 @@ FROM couples, activities
 WHERE (activities.activity_name='Dinner' OR
        activities.activity_name='Dancing' OR
        activities.activity_name='Sight-Seeing' OR
-       activities.activity_name='Unicorn Hunting' OR
-       activities.activity_name='Doggy Date')
+       activities.activity_name='Coffee')
 AND couples.username='fredricksens';
 
 INSERT INTO couples_activities (couples_id, activities_id)
 SELECT couples.id, activities.id
 FROM couples, activities
-WHERE (activities.activity_name='Cat Staring' OR
+WHERE (activities.activity_name='Swinging' OR
        activities.activity_name='Dancing' OR
        activities.activity_name='Sight-Seeing' OR
-       activities.activity_name='Doggy Date')
+       activities.activity_name='Coffee')
 AND couples.username='turins';
 
 INSERT INTO couples_activities (couples_id, activities_id)
 SELECT couples.id, activities.id
 FROM couples, activities
 WHERE (activities.activity_name='Dinner' OR
-       activities.activity_name='Live Music' OR
-       activities.activity_name='Unicorn Hunting' OR
+       activities.activity_name='Music Show' OR
+       activities.activity_name='Swinging' OR
        activities.activity_name='Hiking')
 AND couples.username='mouses';
 
