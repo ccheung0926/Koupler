@@ -2,12 +2,15 @@ angular.module('koupler.profile', [
   'ui.bootstrap'
   ])
 
-.controller('ProfileCtrl', function($scope, $state, $http, Activities, AuthTokenFactory, Upload, socket) {
+.controller('ProfileCtrl', ['$scope', '$state', '$modal', '$http', 'Activities', 'AuthTokenFactory', 'Upload', '$window', 'socket', function($scope, $state, $modal, $http, Activities, AuthTokenFactory, Upload, $window, socket) {
 
   var vm = this;
   //placeholder for POST request until routeParam is set up
   vm.username = $state.params.username;
+
   $scope.sender = $scope.$parent.loginUser;
+
+  $window.localStorage.setItem('Koup_user', vm.username);
 
   vm.goToActivities = function() {
     $state.go('activities');
