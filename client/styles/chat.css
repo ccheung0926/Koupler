@@ -36,6 +36,7 @@
   font-size: 100%;
   line-height: normal;
   margin: 0;
+  resize: none;
 }
 
 .text {

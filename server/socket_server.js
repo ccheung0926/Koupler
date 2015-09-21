@@ -21,6 +21,18 @@ module.exports = function(server){
       users[data.receiver].emit('receivedMessage', data);
       // io.sockets.socket(users[data.receiverUsername]).emit('receivedMessage', data);
     });
+    // when the client emits 'typing', we broadcast it to others
+  // socket.on('typing', function () {
+  //   socket.broadcast.emit('typing', {
+  //     username: socket.username
+  //   });
+  // });
+  // when the client emits 'stop typing', we broadcast it to others
+  // socket.on('stop typing', function () {
+  //   socket.broadcast.emit('stop typing', {
+  //     username: socket.username
+  //   });
+  // });
   });
 
 };

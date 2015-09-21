@@ -16,7 +16,6 @@ angular.module('koupler.main', [])
 
   vm.getLoginUser = function() {
     var token = AuthTokenFactory.getToken();
-    console.log(token);
     //GET request should respond with username
     $http.get('/main/')
       .then(function(response) {
