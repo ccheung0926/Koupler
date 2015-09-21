@@ -5,6 +5,7 @@ angular.module('koupler.chat', [])
   vm.openChatBox = false;
   vm.sender = $scope.$parent.sender;
   vm.chatStart = true;
+  vm.tempMsgStorage;
 
   vm.closeBox = function() {
     vm.chatStart = false;
@@ -19,7 +20,6 @@ angular.module('koupler.chat', [])
     else {
       vm.openChatBox = false;
     }
-    console.log('vm.tempMsgStorage', vm.tempMsgStorage);
     console.log('$scope.parent', $scope.$parent.sender);
   };
 
@@ -29,11 +29,18 @@ angular.module('koupler.chat', [])
       from: vm.sender,
       message: vm.message
     };
-    socket.emit('sendMessageToServer', msg);
-    console.log('msg post request', msg);
+    var storage = {
+      username: vm.sender,
+      receiver: vm.receiverUsername,
+      created_on: new Date(),
+      message: vm.message
+    }
+    vm.tempMsgStorage.push(storage);
+    console.log('send tempMsgStorage', vm.tempMsgStorage);
+    socket.emit('sendMessageToServer', storage);
     $http.post('/chat', msg)
       .then(function(response){
-        console.log('response',response);
+        console.log('msg post!');
       }),
       function(err){
         console.log(err);
@@ -47,11 +54,12 @@ angular.module('koupler.chat', [])
   // couples1: "Victoria Beckham", couples2: "David Beckham"}
     vm.name = data.couples1 + " & " + data.couples2;
     vm.receiverUsername = data.receiverUsername;
-    vm.tempMsgStorage = data.chatData;
+    vm.tempMsgStorage = data.chatHist;
   });
 
   //user received message
   socket.on('receivedMessage', function(data) {
+    console.log('receivedMessage', data);
     vm.tempMsgStorage.push(data);
   });
 

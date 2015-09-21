@@ -1,6 +1,6 @@
 angular.module('koupler.main', [])
 
-.controller('MainCtrl', ['$rootScope', '$scope', '$state', 'AuthTokenFactory', '$http', function($rootScope, $scope, $state, AuthTokenFactory, $http) {
+.controller('MainCtrl', ['$rootScope', '$scope', '$state', 'AuthTokenFactory', '$http','socket', function($rootScope, $scope, $state, AuthTokenFactory, $http, socket) {
 
   vm = this;
 
@@ -22,7 +22,7 @@ angular.module('koupler.main', [])
       .then(function(response) {
         console.log("log in user:", response.data);
         $scope.loginUser = response.data;
-        console.log('main ctrl res', response);
+        socket.emit('createSocketUser', $scope.loginUser);
         console.log('main ctrl loginUser',$scope.loginUser);
       });
   }();

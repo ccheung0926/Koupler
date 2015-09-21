@@ -5,20 +5,21 @@ module.exports = function(server){
   var users = {};
 
   io.on('connection', function(socket){
-    console.log('socket connected');
+    socket.on('createSocketUser', function(data){
+      users[data] = socket;
+    });
     //receiver's username
     socket.on('sendReceiverToServer', function(data){
-      console.log('sendReceiverToServer', data);
-      users[data.receiverUsername] = socket;
-      console.log('receiver', data);
+
       socket.emit('getNameHistfromServer', data);
     });
 
     socket.on('sendMessageToServer', function(data){
-      console.log('Socket sendMessageToServer', data); 
-      //chat hist bewteen users
       // When a message is received, emit the data to the receiver.
-      users[data.to].emit('receivedMessage', data);
+      console.log('sendMessageToServer', data);
+      
+      users[data.receiver].emit('receivedMessage', data);
+      // io.sockets.socket(users[data.receiverUsername]).emit('receivedMessage', data);
     });
   });
 

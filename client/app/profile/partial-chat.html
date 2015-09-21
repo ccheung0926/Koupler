@@ -1,4 +1,5 @@
 <div class="ch-box" ng-controller="ChatCtrl as chat">  
+  <pre>{{chat.tempMsgStorage}}</pre> 
   <div id="live-chat" ng-show="openConversation">
     <!-- <span ng-repeat="msg in ctrl.messageStorage[ctrl.receiver] track by $index"> -->
     
@@ -21,19 +22,19 @@
  -->
           <div class="chat-message-content clearfix">
             
-            <span class="chat-time">content.created_on</span>
-              <h5>{{content.username}}</h5>
+            <span class="chat-time">{{content.created_on | date: "EEE h:mm a"}}</span>
+              <h5><strong>{{content.username}}</strong></h5>
               <p class="messageContent">{{content.message}}</p>
-
           </div> <!-- end chat-message-content -->
 
         </div> <!-- end chat-message -->
 
         <hr>
 
+
       </div> <!-- end chat-history -->
 
-      <p class="chat-feedback">typing...</p>
+      <p class="chat-feedback"></p>
 
       <form>
       <!-- or use<form action="#" method="post"> -->
