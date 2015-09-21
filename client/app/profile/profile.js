@@ -84,4 +84,4 @@ angular.module('koupler.profile', [
         });
       });
   }
-})
+}])
