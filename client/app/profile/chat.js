@@ -9,16 +9,12 @@ angular.module('koupler.chat', [])
   vm.typing = false;  
   vm.timeout = undefined;
 
-  // vm.typing = function(){
-  //   console.log('hello');
-  // }
 
 
 
   vm.closeBox = function() {
     vm.chatStart = false;
   }
-  console.log('chatStart', vm.chatStart);
 
   vm.openClose = function() {
     console.log('chat sender', vm.sender);
@@ -28,7 +24,6 @@ angular.module('koupler.chat', [])
     else {
       vm.openChatBox = false;
     }
-    console.log('$scope.parent', $scope.$parent.sender);
   };
 
   vm.sendMessage = function(){
@@ -67,7 +62,6 @@ angular.module('koupler.chat', [])
 
   //user received message
   socket.on('receivedMessage', function(data) {
-    console.log('receivedMessage', data);
     vm.tempMsgStorage.push(data);
   });
 

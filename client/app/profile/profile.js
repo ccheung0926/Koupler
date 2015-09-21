@@ -17,9 +17,11 @@ angular.module('koupler.profile', [
   };
   vm.profileData = {};
 
+  // when true, hides the profile pic and replaced with uploaded pic
+  vm.hideProfilePic = false;
+
   vm.getProfileInfo = function() {
     var token = AuthTokenFactory.getToken();
-    console.log(token);
     //GET request should respond with user's profile picture, interests, about, memories, etc.
     $http.get('/profile/' + vm.username)
       .then(function(response) {
@@ -29,6 +31,7 @@ angular.module('koupler.profile', [
         console.log("getProfileInfo:", response.data);
         vm.profileData = response.data[0];
       });
+
   };
   vm.getProfileInfo();
 
@@ -45,7 +48,10 @@ angular.module('koupler.profile', [
   console.log('vm.username', vm.username);
   vm.uploadFiles = function(file) {
     vm.f = file;
+
     if (file && !file.$error) {
+      vm.hideProfilePic = true;
+
       file.upload = Upload.upload({
         url: '/profile/' + vm.username + '/pic',
         file: file,
@@ -66,16 +72,10 @@ angular.module('koupler.profile', [
 
   vm.chatInit = function() {
     $scope.openConversation = true;
-// [{message: xxx, created_on: time, username: sender's name}]
     //get chat history
     $http.get('/chat', {params: {to: vm.username, from: $scope.sender}})
       .then(function(response) {
-        // if (response.data[0].isAuthorizedToEdit) {
-        //   vm.isAuthorizedToEdit = true;
-        // };
         vm.chatData = response.data;
-        console.log('chat hist.', vm.chatData);
-        console.log('vm.profileData.username', vm.profileData.username);
         socket.emit('sendReceiverToServer', {
           receiverUsername: vm.profileData.username,
           couples1: vm.profileData.person_1_first_name + " " + vm.profileData.person_1_last_name,

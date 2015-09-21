@@ -19,6 +19,7 @@ angular.module('koupler.auth', [])
         // $location.path('/profile/' + username);
       },
       function(err){
+
         console.log(err);
       });
   };
@@ -32,7 +33,9 @@ angular.module('koupler.auth', [])
         firstName2: $scope.firstName2Signup,
         lastName2: $scope.lastName2Signup,
         email: $scope.emailSignup,
-        phoneNumber: $scope.phoneNumberSignup
+        phoneNumber: $scope.phoneNumberSignup,
+        city: $scope.city,
+        zipCode: $scope.zipCode
       })
       .then(function(response) {
         console.log('signup request');

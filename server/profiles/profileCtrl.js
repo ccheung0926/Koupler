@@ -15,7 +15,6 @@ module.exports = {
     var username = req.params.username;
     var token = req.headers['x-access-token'];
     var requestor = getUsername(token); //note strange but working syntax
-
     profile.getProfileInfo([ username ], function(err, data) {
       if(err) console.log(err);
 
