@@ -13,6 +13,8 @@ angular.module('koupler.profile', [
   };
 
   vm.profileData = {};
+
+  // when true, hides the profile pic and replaced with uploaded pic
   vm.hideProfilePic = false;
 
   vm.getProfileInfo = function() {
