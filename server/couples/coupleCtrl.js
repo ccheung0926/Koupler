@@ -59,7 +59,7 @@ module.exports = {
         console.error('Error: Model does not return query results');
       }
       //check if the password Hash === typed in password
-      if (data) {
+      if(data.length !== 0) {
         bcrypt.compare(req.body.password, data[0]['hash'], function(err, data) {
           if (err) {
             res.status(401).end('Either username or password is incorrect');
