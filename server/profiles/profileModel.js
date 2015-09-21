@@ -45,9 +45,9 @@ module.exports = {
     var fileExtension = path.extname(file.name);
     var date = moment().format('MM-DD-YY');
     var fileName = username + date + fileExtension;
-
+    var cwd = process.cwd();
     // path to directory where profile-pic is saved
-    var targetPath = path.resolve(process.env.PWD + "/server/assets/" +
+    var targetPath = path.resolve(cwd + "/server/assets/" +
                                   username + "/profile-pic/");
 
     // path to profile-pic on server
