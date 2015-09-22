@@ -7,13 +7,18 @@ angular.module('koupler.profile', [
   var vm = this;
   //placeholder for POST request until routeParam is set up
   vm.username = $state.params.username;
+
   $window.localStorage.setItem('Koup_user', vm.username);
+  vm.activities = Activities.getActivities();
 
   vm.goToActivities = function() {
     $state.go('activities');
   };
 
   vm.profileData = {};
+
+  // when true, hides the profile pic and replaced with uploaded pic
+  vm.hideProfilePic = false;
 
   // when true, hides the profile pic and replaced with uploaded pic
   vm.hideProfilePic = false;
@@ -29,13 +34,19 @@ angular.module('koupler.profile', [
         }
         console.log("getProfileInfo:", response.data);
         vm.profileData = response.data[0];
+        vm.userActivities = response.data[1];
+        vm.profileData.activitiesToAdd = [];
       });
+  };
 
+  vm.addActivity = function(activity) {
+    $http.post('/profile/' + vm.username + '/addActivity', activity);
   };
 
   vm.getProfileInfo();
 
   vm.showEditModal = function() {
+    vm.activitiesToAdd = [];
     var editModal = $modal.open({
       animation: $scope.animationsEnabled,
       templateUrl: 'app/profile/modal-editProfile.html',
@@ -43,8 +54,22 @@ angular.module('koupler.profile', [
     });
   };
 
+  vm.submitProfileEdit = function() {
+    $http.post('/profile/' + vm.username + '/edit', vm.profileData)
+      .then(function(response) {
+        $state.reload();
+      });
+  }
 
-
+  vm.submitProfileEdit = function(data) {
+    $http.post('/profile/' + vm.username + '/edit', data)
+      .then(function(response) {
+        $state.reload();
+      });
+  };
+  // vm.cancelEditModal = function () {
+  //   $modalInstance.dismiss('cancel');
+  // };
   vm.uploadFiles = function(file) {
     vm.f = file;
 

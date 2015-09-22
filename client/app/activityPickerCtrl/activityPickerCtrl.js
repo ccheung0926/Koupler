@@ -27,5 +27,10 @@ angular.module('koupler.activities', [])
           userZipCode: vm.userZipCode
         })
       })
+        .then(function(response) {
+          vm.suggestions = response;
+          console.log(vm.suggestions);
+          vm.suggested = true;
+        })
   };
 }]);
