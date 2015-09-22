@@ -35,28 +35,8 @@ angular.module('koupler.profile', [
         console.log("getProfileInfo:", response.data);
         vm.profileData = response.data[0];
         vm.userActivities = response.data[1];
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
         vm.profileData.activitiesToAdd = [];
->>>>>>> (feature) can fully edit and update profile, can view activities in profile, working on adding activities during edit of profile
-=======
->>>>>>> (feature) can fully edit and update profile, can view activities in profile, working on adding activities during edit of profile
-=======
-=======
-        vm.profileData.activitiesToAdd = [];
->>>>>>> (feature) can fully edit and update profile, can view activities in profile, working on adding activities during edit of profile
->>>>>>> (feature) can fully edit and update profile, can view activities in profile, working on adding activities during edit of profile
       });
-
-<<<<<<< HEAD
-  };
-
-  vm.addActivity = function(activity) {
-    $http.post('/profile/' + vm.username + '/addActivity', activity);
-=======
->>>>>>> (fix) profile pic changes when new photo uploaded
   };
 
   vm.addActivity = function(activity) {
@@ -81,34 +61,15 @@ angular.module('koupler.profile', [
       });
   }
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> (feature) can fully edit and update profile, can view activities in profile, working on adding activities during edit of profile
-=======
->>>>>>> (feature) can fully edit and update profile, can view activities in profile, working on adding activities during edit of profile
   vm.submitProfileEdit = function(data) {
     $http.post('/profile/' + vm.username + '/edit', data)
       .then(function(response) {
         $state.reload();
       });
   };
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> (feature) can fully edit and update profile, can view activities in profile, working on adding activities during edit of profile
-=======
   // vm.cancelEditModal = function () {
   //   $modalInstance.dismiss('cancel');
   // };
->>>>>>> (feature) can fully edit and update profile, can view activities in profile, working on adding activities during edit of profile
-<<<<<<< HEAD
-=======
->>>>>>> (feature) can fully edit and update profile, can view activities in profile, working on adding activities during edit of profile
-=======
->>>>>>> (feature) can fully edit and update profile, can view activities in profile, working on adding activities during edit of profile
-
   vm.uploadFiles = function(file) {
     vm.f = file;
 

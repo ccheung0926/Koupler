@@ -78,17 +78,15 @@ module.exports = {
   getSuggestions: function(req, res, next) {
     var activityChosen = req.body.activityChosen.name;
     var userZipCode = req.body.userZipCode;
+    var responseData = [];
 
-    console.log(activityChosen);
-    console.log(userZipCode);
     var fourSquareQuery = "https://api.foursquare.com/v2/venues/explore?client_id=4LZTC04RQVW3EK4UK0BP3WIMIVMI0ZYOHWXQ2ENOEF3YRWAZ&client_secret=0A5K0UVMGUTCLWL2TLX4QKJCD1FHZJDVU55RC2WXLVIFZJXW&v=20130815&near=" + userZipCode + "&query=" + activityChosen;
     request.get(fourSquareQuery, function(req, data, body) {
       body = JSON.parse(body);
       for (var i = 0; i < body.response.groups[0].items.length; i++) {
-        console.log(body.response.groups[0].items[i].venue);
+        responseData.push(body.response.groups[0].items[i].venue);
       }
-      // console.log(body.response.groups[0].items);
-      res.send();
+      res.send(body.response.groups[0]);
     });
   }
 };

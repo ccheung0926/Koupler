@@ -36,9 +36,8 @@ module.exports = {
           responseData.push(userActivities);
           res.send(responseData);
           res.end();
-        })
-      }
-    });
+        }
+      })
   },
 
   editProfile: function(req, res, next) {

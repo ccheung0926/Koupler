@@ -29,6 +29,7 @@ angular.module('koupler.activities', [])
       })
         .then(function(response) {
           vm.suggestions = response;
+          console.log(vm.suggestions);
           vm.suggested = true;
         })
   };
