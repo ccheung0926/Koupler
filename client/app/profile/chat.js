@@ -6,9 +6,6 @@ angular.module('koupler.chat', [])
   vm.sender = $scope.$parent.sender;
   vm.chatStart = true;
   vm.tempMsgStorage;
-  vm.typing = false;  
-  vm.timeout = undefined;
-
 
 
 
