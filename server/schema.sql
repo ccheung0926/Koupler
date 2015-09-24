@@ -306,8 +306,6 @@ WHERE (activities.activity_name='Dinner' OR
        activities.activity_name='Music Show' OR
        activities.activity_name='Hiking')
 AND couples.username='beckhams';
-<<<<<<< HEAD
-
 
 INSERT INTO couples_activities (couples_id, activities_id)
 SELECT couples.id, activities.id
@@ -318,26 +316,10 @@ WHERE (activities.activity_name='Dinner' OR
        activities.activity_name='Hiking')
 AND couples.username='bowzers';
 
-=======
->>>>>>> 49d52302ea39822896f5a8f13d6db75a441233bf
-
 INSERT INTO couples_activities (couples_id, activities_id)
 SELECT couples.id, activities.id
 FROM couples, activities
 WHERE (activities.activity_name='Dinner' OR
-<<<<<<< HEAD
-=======
-       activities.activity_name='Sight-Seeing' OR
-       activities.activity_name='Music Show' OR
-       activities.activity_name='Hiking')
-AND couples.username='bowzers';
-
-INSERT INTO couples_activities (couples_id, activities_id)
-SELECT couples.id, activities.id
-FROM couples, activities
-WHERE (activities.activity_name='Dinner' OR
->>>>>>> 49d52302ea39822896f5a8f13d6db75a441233bf
-       activities.activity_name='Dancing' OR
        activities.activity_name='Sight-Seeing' OR
        activities.activity_name='Coffee')
 AND couples.username='fredricksens';
