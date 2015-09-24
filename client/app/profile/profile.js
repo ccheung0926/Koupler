@@ -11,6 +11,7 @@ angular.module('koupler.profile', [
   $scope.sender = $scope.$parent.loginUser;
 
   $window.localStorage.setItem('Koup_user', vm.username);
+  vm.activities = Activities.getActivities();
 
   vm.goToActivities = function() {
     $state.go('activities');
@@ -30,13 +31,19 @@ angular.module('koupler.profile', [
         }
         console.log("getProfileInfo:", response.data);
         vm.profileData = response.data[0];
+        vm.userActivities = response.data[1];
+        vm.profileData.activitiesToAdd = [];
       });
-
   };
+  vm.addActivity = function(activity) {
+    $http.post('/profile/' + vm.username + '/addActivity', activity);
+  };
+
   vm.getProfileInfo();
 
 
   vm.showEditModal = function() {
+    vm.activitiesToAdd = [];
     var editModal = $modal.open({
       animation: $scope.animationsEnabled,
       templateUrl: 'app/profile/modal-editProfile.html',
@@ -44,8 +51,16 @@ angular.module('koupler.profile', [
     });
   };
 
+  vm.submitProfileEdit = function(data) {
+    $http.post('/profile/' + vm.username + '/edit', data)
+      .then(function(response) {
+        $state.reload();
+      });
+  };
+  // vm.cancelEditModal = function () {
+  //   $modalInstance.dismiss('cancel');
+  // };
 
-  console.log('vm.username', vm.username);
   vm.uploadFiles = function(file) {
     vm.f = file;
 

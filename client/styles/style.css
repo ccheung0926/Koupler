@@ -127,8 +127,22 @@ body > div:first-of-type {
   color: white;
 }
 
-.tabContainer {
-  background-image: url("http://previews.123rf.com/images/inxti/inxti1202/inxti120200037/12232435-two-heart-on-wood-background-with-copy-space--Stock-Photo-day-mothers-wood.jpg");
+.editContainer {
+  background-image: url("http://st.depositphotos.com/2071605/3534/i/950/depositphotos_35345585-aged-dark-wood-texture.jpg");
+  border-radius: 5px;
+}
+
+.black-text {
+  color: black;
+  margin-left: 40px;
+}
+.suggestions-container {
+  background-color: white;
+  border-radius: 10px;
+  font-color: black;
+  border-width: 2px;
+  color: black;
+  margin: 20px;
 }
 
 .tabs {
@@ -231,6 +245,7 @@ h3, p {
   margin-left: auto;
   margin-right: auto;
   margin-top: 50px;
+  z-index: 1;
 }
 
 .activity {
