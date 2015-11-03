@@ -5,6 +5,7 @@ module.exports = function(server){
   var users = {};
 
   io.on('connection', function(socket){
+    console.log('connected');
     socket.on('createSocketUser', function(data){
       users[data] = socket;
     });
